@@ -111,30 +111,37 @@ This app helps users manage their finances by tracking income, expenses, and rec
 - Node.js  
 - MongoDB Atlas or Local MongoDB  
 
+# FinSathi – One-Command Setup
+
+## Clone and Setup Both Frontend & Backend
+```bash
 # Clone repository
 git clone https://github.com/prajwal9773/FinSathi.git
 cd FinSathi
 
-Backend Setup
+# Install backend dependencies
 cd backend
 npm install
 
- Add .env file:
- PORT=
- MONGO_URI=
- GEMINI_API_KEY=
+# Create backend .env file 
+PORT=
+MONGO_URI=
+GEMINI_API_KEY=
 
- Frontend Setup
-cd ../frontend
+
+# Start backend (run in a separate terminal)
+npm start &
+cd ..
+
+# Install frontend dependencies
+cd frontend
 npm install
 
- Add .env file:
- VITE_API_BASE_URL=
+# Create frontend .env file 
 
- Run Backend
-cd ../backend
-npm start
+VITE_API_BASE_URL=
 
- Run Frontend (in another terminal)
-cd ../frontend
+
+# Run frontend
 npm run dev
+
