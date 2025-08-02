@@ -7,6 +7,8 @@ This app helps users manage their finances by tracking income, expenses, and rec
 
 ## Demo Video  
 [![Watch the demo]https://drive.google.com/file/d/1FvqC5H9ClQ7_o6anuHKR-xdniN7HTB5n/view?usp=sharing]  
+[![Watch the video](Dashboard.png)](https://drive.google.com/file/d/1FvqC5H9ClQ7_o6anuHKR-xdniN7HTB5n/view?usp=sharing)
+
 *(Click to watch a quick demo of the project)*  
 
 ---
