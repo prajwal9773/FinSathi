@@ -38,7 +38,7 @@ This app helps users manage their finances by tracking income, expenses, and rec
 ---
 
 ## Screenshots  
-*(Add your actual screenshots here)*  
+
 
 ### Dashboard  
 ![Dashboard Screenshot](Dashboard.png)  
