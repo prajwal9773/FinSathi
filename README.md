@@ -115,39 +115,26 @@ This app helps users manage their finances by tracking income, expenses, and rec
 git clone https://github.com/prajwal9773/FinSathi.git
 cd FinSathi
 
-# ------------------------
 # Backend Setup
-# ------------------------
 cd backend
-
-# Install backend dependencies
 npm install
 
-# Create .env file for backend and add:
+# Add .env file:
 # PORT=
 # MONGO_URI=
 # GEMINI_API_KEY=
 
-# ------------------------
 # Frontend Setup
-# ------------------------
 cd ../frontend
-
-# Install frontend dependencies
 npm install
 
-
-# Create .env file for frontend and add:
+# Add .env file:
 # VITE_API_BASE_URL=
 
-# ------------------------
-# Run the Application
-# ------------------------
-# Start backend (in one terminal)
+# Run Backend
 cd ../backend
 npm start
 
-# Start frontend (in another terminal)
+# Run Frontend (in another terminal)
 cd ../frontend
 npm run dev
-
