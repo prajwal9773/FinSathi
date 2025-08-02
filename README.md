@@ -73,7 +73,7 @@ This app helps users manage their finances by tracking income, expenses, and rec
 | POST   | /login     | User login             |
 | POST   | /register  | User registration      |
 | GET    | /me        | Get current user       |
-| POST   | /logout    | Logout user            |
+
 
 #### Transaction Routes (`/api/transactions`)  
 | Method | Endpoint             | Description                  |
