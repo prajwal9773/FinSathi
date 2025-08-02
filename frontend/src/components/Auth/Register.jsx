@@ -50,9 +50,7 @@ const Register = ({ onRegister }) => {
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Create Your Account</h2>
             <p className="text-blue-100 text-sm">Join FinSathi to manage your finances</p>
-            <div className="p-6 bg-green-600 text-white rounded-xl">
-              Tailwind is finally working! 🎉
-            </div>
+        
 
           </div>
 
