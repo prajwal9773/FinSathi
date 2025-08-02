@@ -41,13 +41,16 @@ This app helps users manage their finances by tracking income, expenses, and rec
 *(Add your actual screenshots here)*  
 
 ### Dashboard  
-![Dashboard Screenshot](dashboard.png)  
+![Dashboard Screenshot](Dashboard.png)  
 
 ### Transactions  
 ![Transactions Screenshot](TransactionList.png)  
 
 ### Receipt Upload  
 ![Receipt Upload Screenshot](Receipt.png)  
+
+### Charts 
+![Visual display](Chart.png)
 
 ---
 
