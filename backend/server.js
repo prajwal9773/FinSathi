@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
-// import rateLimit from "express-rate-limit";
+import rateLimit from "express-rate-limit";
 import connectDB from "./config/database.js";
 import authRoutes from "./routes/auth.js";
 import transactionRoutes from "./routes/transaction.js";
@@ -48,11 +48,11 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(helmet());
 
 //Rate Limiting
-// const limiter = rateLimit({
-//     windowMs: 15 * 60 * 1000,
-//     max: 50
-// });
-// app.use(limiter);
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50
+});
+app.use(limiter);
 
 //Routes
 app.use("/api/auth", authRoutes);
