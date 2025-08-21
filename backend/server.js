@@ -7,6 +7,7 @@ import connectDB from "./config/database.js";
 import authRoutes from "./routes/auth.js";
 import transactionRoutes from "./routes/transaction.js";
 import receiptRoutes from "./routes/receipts.js";
+import budgetRoutes from "./routes/budgets.js";
 
 
 dotenv.config();
@@ -50,7 +51,7 @@ app.use(helmet());
 //Rate Limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 50
+    max: 5000
 });
 app.use(limiter);
 
@@ -58,6 +59,7 @@ app.use(limiter);
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/receipts", receiptRoutes);
+app.use("/api/budgets", budgetRoutes);
 
 
 //Health check

@@ -11,6 +11,7 @@ import TransactionList from './components/Transactions/TransactionList';
 import AddTransaction from './components/Transactions/AddTransaction';
 import ReceiptUpload from './components/ReceiptUpload/ReceiptUpload';
 import Charts from './components/Charts/Charts';
+import Budgets from './components/Budgets/Budgets';
 
 // Services
 import { getCurrentUser } from './services/api';
@@ -67,62 +68,55 @@ function App() {
 
   }
 
-
-
   return (
-    <>
-   <Router>
-    <div className='min-h-screen bg-gray-50'>
-      {user && <Navbar user={user} handleLogout={handleLogout} />}
-      <Routes>
-        <Route path='/login' element={!user ? <Login onLogin={handleLogin} /> : <Navigate to='/dashboard' />}/>
-        <Route path='/register' element={!user ? <Register onRegister={handleRegister} /> : <Navigate to='/dashboard' />}/>
-
-        {/* protected routes start now  */}
-
-        <Route 
-          path='/dashboard' 
-          element={user ? <Dashboard refreshTrigger={refreshTrigger} /> : <Navigate to='/login' />}
-        />
-        <Route path='/transactions' element={user ? <TransactionList/> : <Navigate to='/login' />}/>
-        <Route path='/add-transaction' element={<Navigate to="/add-transaction/new" replace />} />
-        <Route 
-          path='/add-transaction/new' 
-          element={
-            user ? (
-              <AddTransaction 
-                onSuccess={triggerRefresh} 
-                key="add-new"
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        {user && <Navbar user={user} handleLogout={handleLogout} />}
+        <main className="py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Routes>
+              <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+              <Route path="/login" element={!user ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+              <Route path="/register" element={!user ? <Register onRegister={handleRegister} /> : <Navigate to="/dashboard" />} />
+              
+              {/* Protected Routes */}
+              <Route path="/dashboard" element={user ? <Dashboard refreshTrigger={refreshTrigger} /> : <Navigate to="/login" />} />
+              <Route path="/transactions" element={user ? <TransactionList/> : <Navigate to="/login" />} />
+              <Route path="/add-transaction" element={<Navigate to="/add-transaction/new" replace />} />
+              <Route 
+                path='/add-transaction/new' 
+                element={
+                  user ? (
+                    <AddTransaction 
+                      onSuccess={triggerRefresh} 
+                      key="add-new"
+                    />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
+                } 
               />
-            ) : (
-              <Navigate to='/login' />
-            )
-          } 
-        />
-        <Route 
-          path='/edit-transaction/:id' 
-          element={
-            user ? (
-              <AddTransaction 
-                onSuccess={triggerRefresh}
-                key="edit" 
+              <Route 
+                path='/edit-transaction/:id' 
+                element={
+                  user ? (
+                    <AddTransaction 
+                      onSuccess={triggerRefresh}
+                      key="edit" 
+                    />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
+                } 
               />
-            ) : (
-              <Navigate to='/login' />
-            )
-          } 
-        />
-        <Route path='/upload-receipt' element={user ? <ReceiptUpload/> : <Navigate to='/login' />}/>
-        <Route path='/charts' element={user ? <Charts/> : <Navigate to='/login' />}/>
-
-        {/* default routes ab start */}
-
-        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-
-      </Routes>
-    </div>
-   </Router>
-    </>
+              <Route path="/upload-receipt" element={user ? <ReceiptUpload/> : <Navigate to="/login" />} />
+              <Route path="/budgets" element={user ? <Budgets /> : <Navigate to="/login" />} />
+              <Route path="/charts" element={user ? <Charts/> : <Navigate to="/login" />} />
+            </Routes>
+          </div>
+        </main>
+      </div>
+    </Router>
   )
 }
 

@@ -35,6 +35,13 @@ export const getTransactions = async(req, res)=>{
             }
         }
 
+        const keyword = "";
+const results = await Transaction.find({
+  name: { $regex: keyword, $options: "i" }
+});
+
+
+
         const sortObj = {};
         sortObj[sortBy] = sortOrder === 'asc' ? 1 : -1;
 
@@ -46,6 +53,8 @@ export const getTransactions = async(req, res)=>{
             Transaction.find(filter).sort(sortObj).skip(skip).limit(limit).lean(),
             Transaction.countDocuments(filter)
         ])
+
+
         const totalPages = Math.ceil(total / parseInt(limit));
         res.json({
             data:{
@@ -57,6 +66,7 @@ export const getTransactions = async(req, res)=>{
                    totalPages,
                    hasNextPage: parseInt(page) < totalPages,
                    hasPreviousPage: parseInt(page) > 1,
+                   results
                  
                 }
             }
@@ -251,3 +261,4 @@ export const updateTransaction = async(req, res)=>{
         res.status(500).json({message: "Internal server error"});
     }
 }
+

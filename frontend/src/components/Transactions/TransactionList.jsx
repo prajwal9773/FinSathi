@@ -24,7 +24,8 @@ const ListTransactions = () => {
         type: filterType !== 'all' ? filterType : undefined,
         page: currentPage,
         limit: pageSize,
-        sort: '-date' // Show newest transactions first
+        sort: '-date',
+        keyword:'ice' // Show newest transactions first
       };
       const response = await getTransactions(params);
       setTransactions(response.data.data.transactions);
@@ -134,6 +135,7 @@ const ListTransactions = () => {
                     }`}
                   >
                     {tx.type === 'income' ? '+' : '-'}
+                   
                     {formatCurrency(tx.amount)}
                   </div>
                   <Link

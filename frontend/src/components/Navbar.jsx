@@ -9,7 +9,8 @@ import {
   Upload, 
   BarChart3, 
   User, 
-  LogOut 
+  LogOut,
+  Wallet
 } from 'lucide-react';
 
 const Navbar = ({ user, onLogout }) => {
@@ -21,6 +22,7 @@ const Navbar = ({ user, onLogout }) => {
     { name: 'Transactions', href: '/transactions', icon: List },
     { name: 'Add Transaction', href: '/add-transaction', icon: Plus },
     { name: 'Upload Receipt', href: '/upload-receipt', icon: Upload },
+    { name: 'Budgets', href: '/budgets', icon: Wallet },
     { name: 'Charts', href: '/charts', icon: BarChart3 },
   ];
 
