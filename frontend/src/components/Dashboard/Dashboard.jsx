@@ -13,6 +13,7 @@ import {
   ArrowDownRight
 } from 'lucide-react';
 import { getTransactionSummary, getTransactions } from '../../services/api';
+import SpendingInsights from '../Insights/SpendingInsights';
 
 const Dashboard = ({ refreshTrigger = 0 }) => {
   const [summary, setSummary] = useState({
@@ -276,51 +277,75 @@ const Dashboard = ({ refreshTrigger = 0 }) => {
         </div>
       </div>
 
-      {/* Recent Transactions */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-          <h2 className="text-lg font-medium text-gray-900">Recent Transactions</h2>
-          <Link to="/transactions" className="text-sm text-indigo-600 hover:text-indigo-500 font-medium">
-            View all
-          </Link>
-        </div>
-        <div className="divide-y divide-gray-200">
-          {recentTransactions.length === 0 ? (
-            <div className="px-6 py-8 text-center">
-              <p className="text-gray-500">No transactions found for this period.</p>
-              <Link to="/add-transaction" className="mt-2 inline-flex items-center text-sm text-indigo-600 hover:text-indigo-500">
-                Add your first transaction
-                <ArrowUpRight className="ml-1 h-4 w-4" />
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Recent Transactions */}
+        <div className="lg:col-span-2">
+          {/* Recent Transactions */}
+          <div className="bg-white shadow rounded-lg">
+            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+              <h2 className="text-lg font-medium text-gray-900">Recent Transactions</h2>
+              <Link to="/transactions" className="text-sm text-indigo-600 hover:text-indigo-500 font-medium">
+                View all
               </Link>
             </div>
-          ) : (
-            recentTransactions.map((transaction) => (
-              <div key={transaction._id || transaction.id} className="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
-                <div className="flex items-center">
-                  <div className={`flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center ${
-                    transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
-                  }`}>
-                    {transaction.type === 'income' ? (
-                      <ArrowUpRight className="h-5 w-5 text-green-600" />
-                    ) : (
-                      <ArrowDownRight className="h-5 w-5 text-red-600" />
-                    )}
-                  </div>
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">{transaction.description || 'No description'}</div>
-                    <div className="text-sm text-gray-500">
-                      {transaction.category || 'Uncategorized'} • {formatDate(transaction.date)}
+            <div className="divide-y divide-gray-200">
+              {recentTransactions.length === 0 ? (
+                <div className="px-6 py-8 text-center">
+                  <p className="text-gray-500">No transactions found for this period.</p>
+                  <Link to="/add-transaction" className="mt-2 inline-flex items-center text-sm text-indigo-600 hover:text-indigo-500">
+                    Add your first transaction
+                    <ArrowUpRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </div>
+              ) : (
+                recentTransactions.map((transaction) => (
+                  <div key={transaction._id || transaction.id} className="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
+                    <div className="flex items-center">
+                      <div className={`flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center ${
+                        transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                      }`}>
+                        {transaction.type === 'income' ? (
+                          <ArrowUpRight className="h-5 w-5 text-green-600" />
+                        ) : (
+                          <ArrowDownRight className="h-5 w-5 text-red-600" />
+                        )}
+                      </div>
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">{transaction.description || 'No description'}</div>
+                        <div className="text-sm text-gray-500">
+                          {transaction.category || 'Uncategorized'} • {formatDate(transaction.date)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={`text-sm font-medium ${
+                      transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                     </div>
                   </div>
-                </div>
-                <div className={`text-sm font-medium ${
-                  transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
-                }`}>
-                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
-                </div>
-              </div>
-            ))
-          )}
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Spending Insights */}
+        <div className="space-y-6">
+          <SpendingInsights />
+          {/* <Link to="/charts" className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+            <BarChart3 className="h-8 w-8 text-purple-600 mr-3" />
+            <div>
+              <div className="font-medium text-gray-900">View Charts</div>
+              <div className="text-sm text-gray-500">Analyze spending patterns</div>
+            </div>
+          </Link> */}
+          {/* <Link to="/transactions" className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+            <Calendar className="h-8 w-8 text-orange-600 mr-3" />
+            <div>
+              <div className="font-medium text-gray-900">All Transactions</div>
+              <div className="text-sm text-gray-500">View complete history</div>
+            </div>
+          </Link> */}
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ async function processReceipt(imagePath) {
       throw new Error('GEMINI_API_KEY is not configured. Please add it to your .env file.');
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     // Check if file exists
     if (!fs.existsSync(imagePath)) {

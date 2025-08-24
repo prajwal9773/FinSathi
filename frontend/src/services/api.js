@@ -74,4 +74,26 @@ export const extractFromPDF = (formData) => {
 
 export const getUploadHistory = (params) => api.get('/receipts/history', { params });
 
-export default api;
+// Insights API calls
+export const getInsights = () => {
+  return api.get('/insights');
+};
+
+export default {
+  login,
+  register,
+  logout,
+  getCurrentUser,
+  getTransactions,
+  createTransaction,
+  updateTransaction,
+  deleteTransaction,
+  getTransactionById,
+  getTransactionSummary,
+  getChartData,
+  getCategories,
+  uploadReceipt,
+  extractFromPDF,
+  getUploadHistory,
+  getInsights
+};

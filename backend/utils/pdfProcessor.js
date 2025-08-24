@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function processPDFWithGemini(pdfPath, isTransactionHistory = false) {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const pdfBuffer = fs.readFileSync(pdfPath);
     const base64PDF = pdfBuffer.toString('base64');
 

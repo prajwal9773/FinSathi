@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.js";
 import transactionRoutes from "./routes/transaction.js";
 import receiptRoutes from "./routes/receipts.js";
 import budgetRoutes from "./routes/budgets.js";
+import insightRoutes from "./routes/insights.js";
 
 
 dotenv.config();
@@ -60,6 +61,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/receipts", receiptRoutes);
 app.use("/api/budgets", budgetRoutes);
+app.use("/api/insights", insightRoutes);
 
 
 //Health check
@@ -69,12 +71,14 @@ app.get("/api/health", (req,res)=>{
 
 //Error handler
 
-app.use((err, req, res, next)=>{
-    const status = err.status || 500;
-    const message = err.message || "Something went wrong";
-    res.status(status).json({message});
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    error: 'Something went wrong!',
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
 });
-
 
 const PORT = process.env.PORT || 3000;
 
