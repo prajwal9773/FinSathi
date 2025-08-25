@@ -21,24 +21,26 @@ jobs:
         script: |
           set -e
 
-          # Clone repo if not exists, else pull latest
-          if [ ! -d "/opt/finsathi/.git" ]; then
+          APP_DIR="$HOME/finsathi"
+
+          # Clone if not exists, else pull latest
+          if [ ! -d "$APP_DIR/.git" ]; then
             echo "Cloning repo..."
-            git clone https://github.com/prajwal9773/FinSathi.git /opt/finsathi
+            git clone https://github.com/prajwal9773/FinSathi.git "$APP_DIR"
           else
             echo "Repo exists, pulling latest changes..."
-            cd /opt/finsathi
+            cd "$APP_DIR"
             git reset --hard
             git pull origin main
           fi
 
-          cd /opt/finsathi
+          cd "$APP_DIR"
 
-          # Use your existing backend/.env (don’t overwrite)
+          # Do NOT overwrite .env (you keep it manually on server)
 
-          # Build & restart containers
+          # Deploy containers
           docker compose down || true
           docker compose up -d --build
           docker system prune -f
 
-          
+         
