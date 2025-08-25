@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     origin: [
+      "http://3.109.2.255:5173",
       "http://localhost:5173", // Vite dev
       "http://localhost",      // Docker frontend
       "http://localhost:80"    // Explicit port
