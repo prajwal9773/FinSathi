@@ -7,6 +7,7 @@ import {processPDFWithGemini} from "../utils/pdfProcessor.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+
 // Get the current directory name in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
