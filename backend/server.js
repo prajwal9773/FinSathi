@@ -39,16 +39,20 @@ app.use((req, res, next) => {
   });
 
 // CORS setup
-app.use(
-  cors({
-    origin: [
-      "http://3.109.2.255",
-      "http://3.109.2.255:5173",
-      "http://localhost:5173" // Vite dev
-    ],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://3.109.2.255",
+//       "http://3.109.2.255:5173",
+//       "http://localhost:5173" // Vite dev
+//     ],
+//     credentials: true,
+//   })
+// );
+
+app.use(cors({
+  origin: "*",
+}));
 
 
 
