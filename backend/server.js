@@ -38,10 +38,18 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}));
+// CORS setup
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // Vite dev
+      "http://localhost",      // Docker frontend
+      "http://localhost:80"    // Explicit port
+    ],
+    credentials: true,
+  })
+);
+
 
 
 // Then apply other middleware

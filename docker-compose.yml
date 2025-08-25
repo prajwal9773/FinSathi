@@ -1,23 +1,23 @@
 version: '3.8'
+
 services:
-backend:
-build:
-context: .
-dockerfile: Dockerfile.backend
-container_name: mern-backend
-restart: unless-stopped
-env_file: ./backend/.env
-ports:
-- "3000:3000"
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mern-backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    ports:
+      - "3000:3000"
 
-
-frontend:
-build:
-context: .
-dockerfile: Dockerfile.frontend
-container_name: mern-frontend
-restart: unless-stopped
-ports:
-- "80:80"
-depends_on:
-- backend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: mern-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend

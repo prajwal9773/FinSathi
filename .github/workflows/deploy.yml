@@ -9,62 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Checkout repo
     - name: Checkout
       uses: actions/checkout@v4
 
-    # 2. Copy necessary files to EC2
-    - name: Copy files to EC2
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        source: |
-          ./backend
-          ./frontend
-          ./docker-compose.yml
-          ./nginx.conf
-        target: /opt/mern
-        overwrite: true
-
-    # 3. Create backend .env on server
-    - name: Create backend .env on server
+    - name: Deploy via SSH
       uses: appleboy/ssh-action@v1.2.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          mkdir -p /opt/mern/backend
-          cat > /opt/mern/backend/.env <<'ENVEOF'
-          PORT=3000
-          MONGODB_URI=${{ secrets.MONGODB_URI }}
-          JWT_SECRET=${{ secrets.JWT_SECRET }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          ENVEOF
-          chmod 600 /opt/mern/backend/.env
+          set -e
 
-    # 4. Build & deploy with Docker Compose
-    - name: Deploy via Docker Compose
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          cd /opt/mern
+          # Clone repo if not exists, else pull latest
+          if [ ! -d "/opt/finsathi/.git" ]; then
+            echo "Cloning repo..."
+            git clone https://github.com/prajwal9773/FinSathi.git /opt/finsathi
+          else
+            echo "Repo exists, pulling latest changes..."
+            cd /opt/finsathi
+            git reset --hard
+            git pull origin main
+          fi
+
+          cd /opt/finsathi
+
+          # Use your existing backend/.env (don’t overwrite)
+
+          # Build & restart containers
           docker compose down || true
           docker compose up -d --build
           docker system prune -f
 
-    # 5. Verify containers are running
-    - name: Verify deployment
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          docker ps
-          curl -f http://localhost:3000/health || exit 1
+          
