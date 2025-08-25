@@ -4,13 +4,24 @@ import fs from "fs";
 import Transaction from "../models/Transaction.js";
 import processReceipt from "../utils/ocrProcessor.js";
 import {processPDFWithGemini} from "../utils/pdfProcessor.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Get the current directory name in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, '..', 'uploads', 'receipts');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 //multer configuration
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      const uploadPath = 'uploads/receipts';
-      cb(null, uploadPath);
+      cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -233,4 +244,3 @@ export const extractFromPDF = async (req, res) => {
       });
     }
   };
-
