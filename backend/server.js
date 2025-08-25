@@ -25,30 +25,6 @@ app.use((req, res, next) => {
   });
 
 //Middleware
-// Replace the corsOptions with this simpler version for testing
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    if (req.method === 'OPTIONS') {
-      return res.sendStatus(200);
-    }
-    next();
-  });
-
-// CORS setup
-// app.use(
-//   cors({
-//     origin: [
-//       "http://3.109.2.255",
-//       "http://3.109.2.255:5173",
-//       "http://localhost:5173" // Vite dev
-//     ],
-//     credentials: true,
-//   })
-// );
 
 app.use(cors({
   origin: "*",
