@@ -26,10 +26,7 @@ app.use((req, res, next) => {
 
 //Middleware
 
-app.use(cors({
-  origin: "*",
-}));
-
+app.use(cors());
 
 
 // Then apply other middleware
