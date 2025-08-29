@@ -9,11 +9,9 @@ import transactionRoutes from "./routes/transaction.js";
 import receiptRoutes from "./routes/receipts.js";
 import budgetRoutes from "./routes/budgets.js";
 import insightRoutes from "./routes/insights.js";
-
+import goalRoutes from "./routes/goals.js";
 
 dotenv.config();
-
-
 
 connectDB();
 
@@ -22,12 +20,11 @@ const app = express();
 app.use((req, res, next) => {
     console.log(`[${req.method}] ${req.path}`);
     next();
-  });
+});
 
 //Middleware
 
 app.use(cors());
-
 
 // Then apply other middleware
 app.use(express.json());
@@ -47,7 +44,7 @@ app.use("/api/transactions", transactionRoutes);
 app.use("/api/receipts", receiptRoutes);
 app.use("/api/budgets", budgetRoutes);
 app.use("/api/insights", insightRoutes);
-
+app.use("/api/goals", goalRoutes);
 
 //Health check
 app.get("/api/health", (req,res)=>{

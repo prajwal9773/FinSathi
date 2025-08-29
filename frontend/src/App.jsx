@@ -12,6 +12,7 @@ import AddTransaction from './components/Transactions/AddTransaction';
 import ReceiptUpload from './components/ReceiptUpload/ReceiptUpload';
 import Charts from './components/Charts/Charts';
 import Budgets from './components/Budgets/Budgets';
+import Goals from './components/Goals/Goals';
 
 // Services
 import { getCurrentUser } from './services/api';
@@ -112,6 +113,7 @@ function App() {
               <Route path="/upload-receipt" element={user ? <ReceiptUpload/> : <Navigate to="/login" />} />
               <Route path="/budgets" element={user ? <Budgets /> : <Navigate to="/login" />} />
               <Route path="/charts" element={user ? <Charts/> : <Navigate to="/login" />} />
+              <Route path="/goals" element={user ? <Goals refreshTrigger={refreshTrigger} /> : <Navigate to="/login" />} />
             </Routes>
           </div>
         </main>

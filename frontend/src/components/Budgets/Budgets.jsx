@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getBudgets, saveBudget, deleteBudget } from '../../services/budgetService';
 import { format } from 'date-fns';
-import { FaPlus, FaTrash, FaArrowRight, FaArrowLeft, FaSpinner, FaChartPie, FaWallet } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaArrowRight, FaArrowLeft, FaSpinner, FaChartPie, FaWallet, FaBullseye } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Budgets = () => {
   const [budgets, setBudgets] = useState([]);
@@ -214,8 +215,15 @@ const Budgets = () => {
       
       {/* Add Budget Form */}
       <div className="bg-white rounded-lg shadow overflow-hidden mb-8">
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-medium text-gray-900">Add New Budget</h2>
+          <Link 
+            to="/goals" 
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <FaBullseye className="mr-2" />
+            View Goals
+          </Link>
         </div>
         <div className="p-6">
           {error && (
